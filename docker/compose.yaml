@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  triton-server:
+    image: nvcr.io/nvidia/tritonserver:24.01-py3
+    network_mode: "host"
+    volumes:
+      - type: bind
+        source: /home/op3ntrap/Documents/CatalogueScoring/submission/model_repository
+        target: /models
+    command: tritonserver --model-repository=/models --model-control-mode=poll --repository-poll-secs=20 --exit-on-error false
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+  mongodb:
+    image: mongo:7.0.5-jammy
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    restart: always
+    container_name: qdrant
+    ports:
+      - 6333:6333
+      - 6334:6334
+    expose:
+      - 6333
+      - 6334
+      - 6335
+    volumes:
+      - ./qdrant_data:/qdrant_data
+
+configs:
+  qdrant_config:
+    content: |
+            log_level: INFO  
