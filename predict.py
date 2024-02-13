@@ -83,6 +83,7 @@ class EmbeddingWorker:
             custom_parameters=None,
         )
         http_body = httpbody_pb2.HttpBody(data=_data, content_type="application/json")  # type: ignore
+        print(f"request: {http_body}")
         request = gapic.RawPredictRequest(
             endpoint="projects/341272062859/locations/asia-south1/endpoints/430471996413837312",
             http_body=http_body,
@@ -101,4 +102,4 @@ sample ={
 }
 if __name__ == "__main__":
     worker = EmbeddingWorker("document")
-    print(worker.infer_request(sample["text"]))
+    print(worker.infer_request([sample["text"]]))
