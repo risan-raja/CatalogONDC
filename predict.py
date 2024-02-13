@@ -14,7 +14,7 @@ class EmbeddingWorker:
             self.model_name = "queryEmbed"
             self.task = 0
         elif task == "document":
-            self.model_name = "documentEmbed"
+            self.model_name = "docEmbed"
             self.task = 1
         else:
             raise ValueError("Incorrect task (either 'query' or 'document')")
