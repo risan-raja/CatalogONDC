@@ -61,11 +61,11 @@ class EmbeddingWorker:
         else:
             pass
         tokens = self.tokenizer(payload)
-        tokens = {k: v.astype(np.int64) for k, v in tokens.items()}
+        tokens = {k: np.array(v.tolist()) for k, v in tokens.items()}
         inputs = [
             triton_http.InferInput(
                 name=input_name, shape=tokens[input_name].shape, datatype="INT64"
-            ).set_data_from_numpy(tokens[input_name])
+            ).set_data_from_numpy(tokens[input_name],binary_data=False)
             for input_name in self.input_names
         ]
         return inputs
