@@ -34,7 +34,7 @@ class EmbeddingWorker:
                 padding="max_length",
                 truncation=True,
                 max_length=512,
-                return_tensors="pt",
+                return_tensors="np",
             )
         else:
             self.tokenizer = partial(
@@ -42,7 +42,7 @@ class EmbeddingWorker:
                 padding="max_length",
                 truncation=True,
                 max_length=128,
-                return_tensors="pt",
+                return_tensors="np",
             )
         self.api_endpoint = f"projects/{self.project_id}/locations/{self.location}/endpoints/{self.endpoint_id}"
         self.client_api_endpoint: str = "asia-south1-aiplatform.googleapis.com"
@@ -61,7 +61,7 @@ class EmbeddingWorker:
         else:
             pass
         tokens = self.tokenizer(payload)
-        tokens = {k: v.numpy() for k, v in tokens.items()}
+        tokens = {k: v.astype(np.int64) for k, v in tokens.items()}
         inputs = [
             triton_http.InferInput(
                 name=input_name, shape=tokens[input_name].shape, datatype="INT64"
