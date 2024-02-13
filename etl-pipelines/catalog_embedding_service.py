@@ -10,6 +10,8 @@ class DocumentLoader:
         self.db = self.client['catalogStore']
         self.selected_collection = self.db['selected_products']
         self.embedding_client = DocEmbedding()
+        self.doc_text = self.client['catalogStore']['doc_text']
+        self.qdrant_client = QdrantClient()
     
     async def load_documents(self):
         
