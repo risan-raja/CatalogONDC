@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  triton-server:
+    image: nvcr.io/nvidia/tritonserver:24.01-py3
+    network_mode: "host"
+    volumes:
+      - type: bind
+        source: /home/op3ntrap/Documents/CatalogueScoring/triton_models/model_repository
+        target: /models
+    command: tritonserver --model-repository=/models --model-control-mode=poll --repository-poll-secs=20 --exit-on-error false
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

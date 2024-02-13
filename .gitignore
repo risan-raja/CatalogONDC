@@ -1,2 +1,8 @@
 **/.vscode/
 vertexai.ipynb
+**/__pycache__/
+**/.pytest_cache/
+**/.ipynb_checkpoints/
+**/*.onnx
+**/*.pt
+**/*.bin

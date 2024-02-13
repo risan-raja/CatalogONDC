@@ -1,0 +1,142 @@
+model.onnx --output identity.engine --tf32 --data-loader-script=./data_loader.py --builder-optimization-level 6 --iterations 5 --calibration-cache calibration.cache \
+--trt-min-shapes input_ids:[1,4] attention_mask:[1,4] token_type_ids:[1,4] \
+--trt-opt-shapes input_ids:[1,4] attention_mask:[1,4] token_type_ids:[1,4] \
+--trt-max-shapes input_ids:[1,4] attention_mask:[1,4] token_type_ids:[1,4] \
+--trt-min-shapes input_ids:[1,8] attention_mask:[1,8] token_type_ids:[1,8] \
+--trt-opt-shapes input_ids:[1,8] attention_mask:[1,8] token_type_ids:[1,8] \
+--trt-max-shapes input_ids:[1,8] attention_mask:[1,8] token_type_ids:[1,8] \
+--trt-min-shapes input_ids:[1,16] attention_mask:[1,16] token_type_ids:[1,16] \
+--trt-opt-shapes input_ids:[1,16] attention_mask:[1,16] token_type_ids:[1,16] \
+--trt-max-shapes input_ids:[1,16] attention_mask:[1,16] token_type_ids:[1,16] \
+--trt-min-shapes input_ids:[1,24] attention_mask:[1,24] token_type_ids:[1,24] \
+--trt-opt-shapes input_ids:[1,24] attention_mask:[1,24] token_type_ids:[1,24] \
+--trt-max-shapes input_ids:[1,24] attention_mask:[1,24] token_type_ids:[1,24] \
+--trt-min-shapes input_ids:[1,32] attention_mask:[1,32] token_type_ids:[1,32] \
+--trt-opt-shapes input_ids:[1,32] attention_mask:[1,32] token_type_ids:[1,32] \
+--trt-max-shapes input_ids:[1,32] attention_mask:[1,32] token_type_ids:[1,32] \
+--trt-min-shapes input_ids:[1,48] attention_mask:[1,48] token_type_ids:[1,48] \
+--trt-opt-shapes input_ids:[1,48] attention_mask:[1,48] token_type_ids:[1,48] \
+--trt-max-shapes input_ids:[1,48] attention_mask:[1,48] token_type_ids:[1,48] \
+--trt-min-shapes input_ids:[1,64] attention_mask:[1,64] token_type_ids:[1,64] \
+--trt-opt-shapes input_ids:[1,64] attention_mask:[1,64] token_type_ids:[1,64] \
+--trt-max-shapes input_ids:[1,64] attention_mask:[1,64] token_type_ids:[1,64] \
+--trt-min-shapes input_ids:[1,72] attention_mask:[1,72] token_type_ids:[1,72] \
+--trt-opt-shapes input_ids:[1,72] attention_mask:[1,72] token_type_ids:[1,72] \
+--trt-max-shapes input_ids:[1,72] attention_mask:[1,72] token_type_ids:[1,72] \
+--trt-min-shapes input_ids:[1,128] attention_mask:[1,128] token_type_ids:[1,128] \
+--trt-opt-shapes input_ids:[1,128] attention_mask:[1,128] token_type_ids:[1,128] \
+--trt-max-shapes input_ids:[1,128] attention_mask:[1,128] token_type_ids:[1,128] \
+--trt-min-shapes input_ids:[1,256] attention_mask:[1,256] token_type_ids:[1,256] \
+--trt-opt-shapes input_ids:[1,256] attention_mask:[1,256] token_type_ids:[1,256] \
+--trt-max-shapes input_ids:[1,256] attention_mask:[1,256] token_type_ids:[1,256] \
+--trt-min-shapes input_ids:[1,360] attention_mask:[1,360] token_type_ids:[1,360] \
+--trt-opt-shapes input_ids:[1,360] attention_mask:[1,360] token_type_ids:[1,360] \
+--trt-max-shapes input_ids:[1,360] attention_mask:[1,360] token_type_ids:[1,360] \
+--trt-min-shapes input_ids:[1,480] attention_mask:[1,480] token_type_ids:[1,480] \
+--trt-opt-shapes input_ids:[1,480] attention_mask:[1,480] token_type_ids:[1,480] \
+--trt-max-shapes input_ids:[1,480] attention_mask:[1,480] token_type_ids:[1,480] \
+
+
+
+--trt-min-shapes input_ids:[1,512] attention_mask:[1,512] token_type_ids:[1,512] \
+--trt-opt-shapes input_ids:[4,512] attention_mask:[4,512] token_type_ids:[4,512] \
+--trt-max-shapes input_ids:[16,512] attention_mask:[16,512] token_type_ids:[16,512] \
+--trt-min-shapes input_ids:[4,4] attention_mask:[4,4] token_type_ids:[4,4] \
+--trt-opt-shapes input_ids:[4,256] attention_mask:[4,256] token_type_ids:[4,256] \
+--trt-max-shapes input_ids:[4,512] attention_mask:[4,512] token_type_ids:[4,512] \
+--trt-min-shapes input_ids:[1,4] attention_mask:[1,4] token_type_ids:[1,4] \
+--trt-opt-shapes input_ids:[1,256] attention_mask:[1,256] token_type_ids:[1,256] \
+--trt-max-shapes input_ids:[1,512] attention_mask:[1,512] token_type_ids:[1,512] \
+--trt-min-shapes input_ids:[16,4] attention_mask:[16,256] token_type_ids:[16,256] \
+--trt-opt-shapes input_ids:[16,256] attention_mask:[16,256] token_type_ids:[16,256] \
+--trt-max-shapes input_ids:[16,512] attention_mask:[16,512] token_type_ids:[16,512] \
+--trt-min-shapes input_ids:[8,4] attention_mask:[8,4] token_type_ids:[8,4] \
+--trt-opt-shapes input_ids:[8,256] attention_mask:[8,256] token_type_ids:[8,256] \
+--trt-max-shapes input_ids:[8,512] attention_mask:[8,512] token_type_ids:[8,512] \
+
+
+
+
+
+
+
+
+--trt-min-shapes input_ids:[1,640] attention_mask:[1,640] token_type_ids:[1,640] \
+--trt-opt-shapes input_ids:[1,640] attention_mask:[1,640] token_type_ids:[1,640] \
+--trt-max-shapes input_ids:[1,640] attention_mask:[1,640] token_type_ids:[1,640] \
+--trt-min-shapes input_ids:[1,768] attention_mask:[1,768] token_type_ids:[1,768] \
+--trt-opt-shapes input_ids:[1,768] attention_mask:[1,768] token_type_ids:[1,768] \
+--trt-max-shapes input_ids:[1,768] attention_mask:[1,768] token_type_ids:[1,768] \
+--trt-min-shapes input_ids:[1,1024] attention_mask:[1,1024] token_type_ids:[1,1024] \
+--trt-opt-shapes input_ids:[1,1024] attention_mask:[1,1024] token_type_ids:[1,1024] \
+--trt-max-shapes input_ids:[1,1024] attention_mask:[1,1024] token_type_ids:[1,1024] \
+--trt-min-shapes input_ids:[1,1536] attention_mask:[1,1536] token_type_ids:[1,1536] \
+--trt-opt-shapes input_ids:[1,1536] attention_mask:[1,1536] token_type_ids:[1,1536] \
+--trt-max-shapes input_ids:[1,1536] attention_mask:[1,1536] token_type_ids:[1,1536] \
+--trt-min-shapes input_ids:[1,2048] attention_mask:[1,2048] token_type_ids:[1,2048] \
+--trt-opt-shapes input_ids:[1,2048] attention_mask:[1,2048] token_type_ids:[1,2048] \
+--trt-max-shapes input_ids:[1,2048] attention_mask:[1,2048] token_type_ids:[1,2048] 
+
+
+
+
+
+model.onnx --output concurrent.engine --tf32 --data-loader-script=./data_loader.py --builder-optimization-level 6 --iterations 5 --calibration-cache calibration.cache \
+--trt-min-shapes input_ids:[1,4] attention_mask:[1,4] token_type_ids:[1,4] \
+--trt-opt-shapes input_ids:[2,4] attention_mask:[2,4] token_type_ids:[2,4] \
+--trt-max-shapes input_ids:[3,4] attention_mask:[3,4] token_type_ids:[3,4] \
+--trt-min-shapes input_ids:[1,8] attention_mask:[1,8] token_type_ids:[1,8] \
+--trt-opt-shapes input_ids:[2,8] attention_mask:[2,8] token_type_ids:[2,8] \
+--trt-max-shapes input_ids:[3,8] attention_mask:[3,8] token_type_ids:[3,8] \
+--trt-min-shapes input_ids:[1,16] attention_mask:[1,16] token_type_ids:[1,16] \
+--trt-opt-shapes input_ids:[2,16] attention_mask:[2,16] token_type_ids:[2,16] \
+--trt-max-shapes input_ids:[3,16] attention_mask:[3,16] token_type_ids:[3,16] \
+--trt-min-shapes input_ids:[1,24] attention_mask:[1,24] token_type_ids:[1,24] \
+--trt-opt-shapes input_ids:[2,24] attention_mask:[2,24] token_type_ids:[2,24] \
+--trt-max-shapes input_ids:[3,24] attention_mask:[3,24] token_type_ids:[3,24] \
+--trt-min-shapes input_ids:[1,32] attention_mask:[1,32] token_type_ids:[1,32] \
+--trt-opt-shapes input_ids:[2,32] attention_mask:[2,32] token_type_ids:[2,32] \
+--trt-max-shapes input_ids:[3,32] attention_mask:[3,32] token_type_ids:[3,32] \
+--trt-min-shapes input_ids:[1,48] attention_mask:[1,48] token_type_ids:[1,48] \
+--trt-opt-shapes input_ids:[2,48] attention_mask:[2,48] token_type_ids:[2,48] \
+--trt-max-shapes input_ids:[3,48] attention_mask:[3,48] token_type_ids:[3,48] \
+--trt-min-shapes input_ids:[1,64] attention_mask:[1,64] token_type_ids:[1,64] \
+--trt-opt-shapes input_ids:[2,64] attention_mask:[2,64] token_type_ids:[2,64] \
+--trt-max-shapes input_ids:[3,64] attention_mask:[3,64] token_type_ids:[3,64] \
+--trt-min-shapes input_ids:[1,72] attention_mask:[1,72] token_type_ids:[1,72] \
+--trt-opt-shapes input_ids:[2,72] attention_mask:[2,72] token_type_ids:[2,72] \
+--trt-max-shapes input_ids:[3,72] attention_mask:[3,72] token_type_ids:[3,72] \
+--trt-min-shapes input_ids:[1,128] attention_mask:[1,128] token_type_ids:[1,128] \
+--trt-opt-shapes input_ids:[2,128] attention_mask:[2,128] token_type_ids:[2,128] \
+--trt-max-shapes input_ids:[3,128] attention_mask:[3,128] token_type_ids:[3,128] \
+--trt-min-shapes input_ids:[1,256] attention_mask:[1,256] token_type_ids:[1,256] \
+--trt-opt-shapes input_ids:[2,256] attention_mask:[2,256] token_type_ids:[2,256] \
+--trt-max-shapes input_ids:[3,256] attention_mask:[3,256] token_type_ids:[3,256] \
+--trt-min-shapes input_ids:[1,360] attention_mask:[1,360] token_type_ids:[1,360] \
+--trt-opt-shapes input_ids:[2,360] attention_mask:[2,360] token_type_ids:[2,360] \
+--trt-max-shapes input_ids:[3,360] attention_mask:[3,360] token_type_ids:[3,360] \
+--trt-min-shapes input_ids:[1,480] attention_mask:[1,480] token_type_ids:[1,480] \
+--trt-opt-shapes input_ids:[2,480] attention_mask:[2,480] token_type_ids:[2,480] \
+--trt-max-shapes input_ids:[3,480] attention_mask:[3,480] token_type_ids:[3,480] \
+--trt-min-shapes input_ids:[1,512] attention_mask:[1,512] token_type_ids:[1,512] \
+--trt-opt-shapes input_ids:[2,512] attention_mask:[2,512] token_type_ids:[2,512] \
+--trt-max-shapes input_ids:[3,512] attention_mask:[3,512] token_type_ids:[3,512] \
+--trt-min-shapes input_ids:[1,640] attention_mask:[1,640] token_type_ids:[1,640] \
+--trt-opt-shapes input_ids:[2,640] attention_mask:[2,640] token_type_ids:[2,640] \
+--trt-max-shapes input_ids:[3,640] attention_mask:[3,640] token_type_ids:[3,640] \
+--trt-min-shapes input_ids:[1,768] attention_mask:[1,768] token_type_ids:[1,768] \
+--trt-opt-shapes input_ids:[2,768] attention_mask:[2,768] token_type_ids:[2,768] \
+--trt-max-shapes input_ids:[3,768] attention_mask:[3,768] token_type_ids:[3,768] \
+--trt-min-shapes input_ids:[1,1024] attention_mask:[1,1024] token_type_ids:[1,1024] \
+--trt-opt-shapes input_ids:[2,1024] attention_mask:[2,1024] token_type_ids:[2,1024] \
+--trt-max-shapes input_ids:[3,1024] attention_mask:[3,1024] token_type_ids:[3,1024] \
+--trt-min-shapes input_ids:[1,1536] attention_mask:[1,1536] token_type_ids:[1,1536] \
+--trt-opt-shapes input_ids:[2,1536] attention_mask:[2,1536] token_type_ids:[2,1536] \
+--trt-max-shapes input_ids:[3,1536] attention_mask:[3,1536] token_type_ids:[3,1536] \
+--trt-min-shapes input_ids:[1,2048] attention_mask:[1,2048] token_type_ids:[1,2048] \
+--trt-opt-shapes input_ids:[2,2048] attention_mask:[2,2048] token_type_ids:[2,2048] \
+--trt-max-shapes input_ids:[3,2048] attention_mask:[3,2048] token_type_ids:[3,2048] 
+
+
+
+

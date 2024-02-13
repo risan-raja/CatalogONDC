@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../PycharmProjects/rust_web/python_client"
+		},
+		{
+			"path": "../../project/modules/embed_dense"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			"**/__pycache__": true,
+		}
+	},
+}
