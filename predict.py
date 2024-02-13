@@ -70,23 +70,35 @@ class EmbeddingWorker:
         ]
         return inputs
 
-    def infer_request(self,payload):
+    def infer_request(self, payload):
         _data, _ = triton_http._utils._get_inference_request(
-        inputs=self.prepare_inputs(payload),
-        outputs=self.triton_output_http,
-        request_id="1",
-        sequence_id=0,
-        sequence_start=False,
-        sequence_end=False,
-        priority=0,
-        timeout=None,
-        custom_parameters=None,
+            inputs=self.prepare_inputs(payload),
+            outputs=self.triton_output_http,
+            request_id="1",
+            sequence_id=0,
+            sequence_start=False,
+            sequence_end=False,
+            priority=0,
+            timeout=None,
+            custom_parameters=None,
         )
-        http_body = httpbody_pb2.HttpBody(data=_data, content_type="application/json") # type: ignore
-        request=gapic.RawPredictRequest(
-        endpoint="projects/341272062859/locations/asia-south1/endpoints/430471996413837312",
-        http_body=http_body,)
-       
-        response = self.gapic_client.raw_predict(request=request, metadata=tuple(self.headers.items()))
+        http_body = httpbody_pb2.HttpBody(data=_data, content_type="application/json")  # type: ignore
+        request = gapic.RawPredictRequest(
+            endpoint="projects/341272062859/locations/asia-south1/endpoints/430471996413837312",
+            http_body=http_body,
+        )
+
+        response = self.gapic_client.raw_predict(
+            request=request, metadata=tuple(self.headers.items())
+        )
         return response
 
+
+sample ={
+    "_id": "6880884c_4ce76b05",
+    "text": "Fashion|Women's Apparel|Indian & Fusion Wear|Kurtas, Kurta Sets & Suits|brand->Anubhutee|product name->Women Navy Blue Yoke Design Straight Kurta|short product description->Navy blue yoke design straight kurta with thread work detail, has a round neck, three-quarter sleeves, straight hem, side slits, button closure|size->M|colour->Navy Blue,Blue|pattern->Yoke Design|occasion->Festive|shape->Straight|neck->Round Neck|fit->Straight|design styling->Regular|print or pattern type->Paisley|length->Calf Length|weave type->Machine Weave|slit detail->Side Slits|weave pattern->Regular|trend->Slits|ornamentation->Thread Work|gender->Women|selling price->6960.0|sleeve length->Three-Quarter Sleeves|hemline->Straight|colour family->Indigo|rating->4.3|mrp->2049.0",
+    "md5_hash": "4064381492b7a15310639327636428af",
+}
+if __name__ == "__main__":
+    worker = EmbeddingWorker("document")
+    print(worker.infer_request(sample["text"]))
