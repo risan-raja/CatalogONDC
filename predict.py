@@ -5,6 +5,8 @@ from google.api import httpbody_pb2
 from google.cloud import aiplatform as aip
 from google.cloud import aiplatform_v1 as gapic
 from transformers import AutoTokenizer
+import time
+import asyncio
 
 
 class EmbeddingWorker:
@@ -93,6 +95,20 @@ class EmbeddingWorker:
             request=request, metadata=tuple(self.headers.items())
         )
         return response
+    
+    def embed(self,payload):
+        start = time.perf_counter()
+        response = self.infer_request(payload)
+        end = time.perf_counter()
+        print(f"{end - start} seconds")
+    
+    async def async_embed(self,payload):
+        start = time.perf_counter()
+        # loop = asyncio.get_event_loop()
+        # response_dict = loop.run_in_execu/tor(None, self.infer_request, payload)
+        response = self.infer_request(payload)
+        end = time.perf_counter()
+        print(f"{end - start} seconds")
 
 
 sample ={
@@ -100,6 +116,11 @@ sample ={
     "text": "Fashion|Women's Apparel|Indian & Fusion Wear|Kurtas, Kurta Sets & Suits|brand->Anubhutee|product name->Women Navy Blue Yoke Design Straight Kurta|short product description->Navy blue yoke design straight kurta with thread work detail, has a round neck, three-quarter sleeves, straight hem, side slits, button closure|size->M|colour->Navy Blue,Blue|pattern->Yoke Design|occasion->Festive|shape->Straight|neck->Round Neck|fit->Straight|design styling->Regular|print or pattern type->Paisley|length->Calf Length|weave type->Machine Weave|slit detail->Side Slits|weave pattern->Regular|trend->Slits|ornamentation->Thread Work|gender->Women|selling price->6960.0|sleeve length->Three-Quarter Sleeves|hemline->Straight|colour family->Indigo|rating->4.3|mrp->2049.0",
     "md5_hash": "4064381492b7a15310639327636428af",
 }
+async def test_async_speed():
+    worker = EmbeddingWorker("document")
+    results = await asyncio.gather(*[worker.async_embed(sample["text"]) for _ in range(1000)])
+    return "Done"
+
 if __name__ == "__main__":
     worker = EmbeddingWorker("document")
     import time
@@ -109,3 +130,4 @@ if __name__ == "__main__":
         # print(embedding)/
         end = time.perf_counter()
         print(f"{end - start} seconds")
+    asyncio.run(test_async_speed())
