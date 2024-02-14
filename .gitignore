@@ -3,8 +3,6 @@ vertexai.ipynb
 **/__pycache__/
 **/.pytest_cache/
 **/.ipynb_checkpoints/
-**/*.onnx
-**/*.pt
 **/*.bin
 etl-pipelines/catalogStore.selected_products.json
 etl-pipelines/all_points.pkl
