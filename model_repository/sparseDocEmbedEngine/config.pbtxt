@@ -1,0 +1,37 @@
+name: "sparseDocEmbedEngine"
+platform: "onnxruntime_onnx"
+backend: "onnxruntime"
+default_model_filename: "model.onnx"
+max_batch_size: 16
+
+dynamic_batching {
+    preferred_batch_size: [ 1,2,4,8,16]
+}
+
+
+input [
+    {
+        name: "input_ids"
+        data_type: TYPE_INT64
+        dims: [ -1 ]
+    },
+    {
+        name: "attention_mask"
+        data_type: TYPE_INT64
+        dims: [ -1 ]
+    }
+]
+output [
+    {
+        name: "sparse_embeddings"
+        data_type: TYPE_FP32
+        dims: [30522]
+    }
+]
+instance_group [
+    {
+      count: 1
+      kind: KIND_GPU
+    }
+]
+

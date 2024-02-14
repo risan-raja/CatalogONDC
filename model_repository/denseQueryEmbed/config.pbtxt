@@ -1,0 +1,54 @@
+name: "denseQueryEmbed"
+platform: "onnxruntime_onnx"
+backend: "onnxruntime"
+default_model_filename: "model.onnx"
+max_batch_size: 32 
+
+dynamic_batching {
+    preferred_batch_size: [ 1,2,4,8,16,32]
+  }
+
+
+input [
+    {
+        name: "input_ids"
+        data_type: TYPE_INT64
+        dims: [ -1 ]
+    },
+    {
+        name: "attention_mask"
+        data_type: TYPE_INT64
+        dims: [ -1 ]
+    },
+    {
+        name: "token_type_ids"
+        data_type: TYPE_INT64
+        dims: [ -1 ]
+    }
+]
+
+output [
+    {
+        name: "last_hidden_state"
+        data_type: TYPE_FP32
+        dims: [ 768 ]
+    }
+]
+instance_group [
+    {
+      count: 3
+      kind: KIND_GPU
+    }
+]
+optimization {
+  graph: {
+    level: 1
+    }
+}
+
+parameters { 
+    key: "execution_mode" 
+    value: { 
+        string_value: "1"
+    }
+}

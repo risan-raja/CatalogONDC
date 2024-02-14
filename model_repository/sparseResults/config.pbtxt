@@ -1,0 +1,26 @@
+name: "sparseResults"
+platform: "pytorch_libtorch"
+default_model_filename: "model.pt"
+max_batch_size: 32
+
+input [
+    {
+        name: "INPUT0"
+        data_type: TYPE_FP32
+        dims: [ 30522 ]
+    }
+   
+]
+output [
+     {
+        name: "OUTPUT0"
+        data_type: TYPE_FP32
+        dims: [ 2, 512 ]
+    }
+]
+parameters: {
+key: "INFERENCE_MODE"
+    value: {
+    string_value: "true"
+    }
+}
