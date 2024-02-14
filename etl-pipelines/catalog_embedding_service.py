@@ -9,23 +9,16 @@ from qdrant_client import QdrantClient, models
 from concurrent.futures import ThreadPoolExecutor
 from threading import Thread
 import joblib
-
 ##### Example of Indexing Using Triton Inference Server
-##### Need to extract Performance Metrics during Execution.
 import json
-
-    # print(data)
-
 
 QDRANT_URL="https://d6e75571-dd9e-4874-960f-5406b164b91a.ap-southeast-1-0.aws.cloud.qdrant.io"
 class DocumentLoader:
     def __init__(self):
-        with open('catalogStore.selected_products.json','r') as f:
-            self.data = json.load(f)
-
+        self.client = MongoClient("mongodb://localhost:27017")
         self.embedding_client = DocEmbedding()
-        self.qclient = QdrantClient(host="localhost", port=6333)
-        # self.qclient = QdrantClient(url=QDRANT_URL, api_key=os.environ['QDRANT_CLOUD'])
+        # self.qclient = QdrantClient(host="localhost", port=6333)
+        self.qclient = QdrantClient(url=QDRANT_URL, api_key=os.environ['QDRANT_CLOUD'])
         self.db_fetch_time = []
         self.db_insert_time = []
         self.db_embed_time = []
@@ -36,9 +29,6 @@ class DocumentLoader:
         return text
     
 
-    def upload_to_qdrant(self, metadata, embeddings):
-        pass
-
     def load_documents(self):
         counter =0 
         batch = []
@@ -46,8 +36,19 @@ class DocumentLoader:
         point_ids = []
         threads = []
         batch_size = 4
+        lookup_hash = {
+            "$lookup": {
+                "from": "doc_text",
+                "localField": "hash",
+                "foreignField": "md5_hash",
+                "as": "matched_docs"
+            }
+        }
+        pipeline = [
+            lookup_hash
+        ]
         with tqdm(total=int(305261)) as pbar:
-            for doc in self.data:
+            for doc in self.client.catalogStore.selected_documents.aggregate(pipeline):
                 # if counter >30:
                 #   break
                 if len(batch) >= batch_size:
@@ -72,8 +73,8 @@ class DocumentLoader:
                         for point_id, embedding,payload in zip(point_ids, embeddings,payloads)
                     ]
                     self.all_points.extend(points)
-                    t = Thread(target=self.qclient.upload_points, args=("ondc-index-dummy", points))
-                    self.qclient.upload_points(collection_name="ondc-index-dummy", points=points,wait=False)
+                    t = Thread(target=self.qclient.upload_points, args=("ondc-index", points))
+                    self.qclient.upload_points(collection_name="ondc-index", points=points,wait=False)
                     t.start()
                     threads.append(t)
                     insert_end = time.perf_counter()
@@ -82,21 +83,18 @@ class DocumentLoader:
                     payloads = []
                     point_ids = []
                     pbar.update(batch_size)
-                    # counter += 1
-                # product_hash =   # Document Hash
                 batch.append(doc['matched_docs'][0])
                 point_ids.append(doc["_id"])
                 del doc["_id"]
                 del doc["matched_docs"]
                 payloads.append(doc)
-        # for t in threads:
-        #     t.join()
+        for t in threads:
+            t.join()
         print("Done")
 
 if __name__ == "__main__":
     print("Total 305,261 documents are going to be indexed and uploaded to a Qdrant Cluster")
     loader = DocumentLoader()
-    # asyncio.run(loader.load_documents())
     try:
         loader.load_documents()
     except KeyboardInterrupt:

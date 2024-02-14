@@ -17,3 +17,10 @@
      - Qdrant returns top 10000 results
      - Filter results based on payload filters.
      - Send ids to High Availability Database for final retrieval.
+  
+
+#### Files in this directory
+ - `catalog_embedding_service.py` - Service to convert structured data to unstructured data and add to Qdrant
+ - `destructure.py` - Convert structured data to unstructured data
+ - `ensemble_client.py` - Example Client of Triton Server
+ - `sparse_preprocessor.py` - Prep the data for lexical indexing
