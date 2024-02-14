@@ -1,1 +1,4 @@
 /cloud_client/index/selected_products.json filter=lfs diff=lfs merge=lfs -text
+/model_repository/denseDocEmbed/1/model.onnx filter=lfs diff=lfs merge=lfs -text
+/model_repository/denseQueryEmbed/1/model.onnx filter=lfs diff=lfs merge=lfs -text
+/model_repository/sparseDocEmbedEngine/1/model.onnx filter=lfs diff=lfs merge=lfs -text
