@@ -9,7 +9,7 @@ in the ensemble should also work.
 from functools import partial
 from typing import Union
 import numpy as np
-from transformers import PreTrainedTokenizerFast
+from transformers import PreTrainedTokenizerFast,AutoTokenizer
 import asyncio
 from tritonclient.grpc import InferenceServerClient, InferInput, InferRequestedOutput
 from sparse_preprocessor import SparseDocTextPreprocessor
@@ -22,11 +22,10 @@ import numpy as np
 
 warnings.filterwarnings("ignore")
 
-@nbp.njit(nopython=True)
 def process_sparse(sv):
     batch_size = sv.shape[0]
     results = []
-    for batch in nbp.prange(batch_size):
+    for batch in np.arange(batch_size):
         mask = sv[batch][0] > 0
         indices = sv[batch][0][mask]
         values = sv[batch][1][mask]
@@ -101,8 +100,11 @@ class DocEmbedding:
     def __init__(self) -> None:
         self.max_length = 512
         self.model_name = "docEmbed"
-        self.tokenizer = PreTrainedTokenizerFast.from_pretrained(
-          "/home/op3ntrap/Repos/CatalogONDC/bert-tokenizer-hf"
+        # self.tokenizer = PreTrainedTokenizerFast.from_pretrained(
+        #   "/home/op3ntrap/Repos/CatalogONDC/bert-tokenizer-hf"
+        # )
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            "jinaai/jina-embeddings-v2-base-en"
         )
         self.tokenizer = partial(
             self.tokenizer,
@@ -141,7 +143,7 @@ class DocEmbedding:
             model_name=self.model_name,
             inputs=inputs,
             outputs=outputs,
-            compression_algorithm="gzip",
+            compression_algorithm="deflate",
         )
         results = {name: results.as_numpy(name) for name in self.output_names} # type:ignore
         results['sparse_embedding']= [dict(x) for x in process_sparse(results['sparse_embedding'])] # type:ignore
@@ -162,7 +164,8 @@ class DocEmbedding:
 
 
 if __name__ == "__main__":
-    qe = QueryEmbedding()
+
+    qe = DocEmbedding()
     text = ["The quick brown fox jumps over the lazy dog."] * 16
-    results = qe.embed(text)
-    print(results)
+    results = qe.infer(text)
+    # print(results)
