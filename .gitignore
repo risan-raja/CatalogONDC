@@ -10,3 +10,4 @@ etl-pipelines/catalogStore.selected_products.json
 etl-pipelines/all_points.pkl
 etl-pipelines/Metrics.ipynb
 embedding-clients/predict.ipynb
+CatalogONDC.code-workspace
