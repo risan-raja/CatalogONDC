@@ -1,0 +1,20 @@
+{
+  "Men's Apparel": {
+    "Topwear": {},
+    "Bottomwear": {},
+    "Innerwear & Sleepwear": {}
+  },
+  "Women's Jewellery": { "Jewellery": {} },
+  "Women's Apparel": {
+    "Lingerie & Sleepwear": {},
+    "Indian & Fusion Wear": {},
+    "Western Wear": {}
+  },
+  "Women's Footwear": { "Footwear": {} },
+  "Kid's Apparel": { "Girl's Clothing": {}, "Boy's Clothing": {} },
+  "Men's Footwear": { "Footwear": {} },
+  "Infants Apparel": { "Infant's Wear": {} },
+  "Men's Eyewear": { "Eyewear": {} },
+  "Kid's Footwear": { "Girl's Footwear": {} },
+  "Women's Accessories": { "Footwear Accessories": {} }
+}
