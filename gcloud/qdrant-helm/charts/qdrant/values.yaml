@@ -17,10 +17,9 @@ env: {}
 # checks - Readiness and liveness checks can only be enabled for either http (REST) or grpc (multiple checks not supported)
 # grpc checks are only available from k8s 1.24+ so as of per default we check http
 service:
-  type: ClusterIP
+  type: NodePort
   additionalLabels: {}
   annotations: {}
-  loadBalancerIP: ""
   ports:
     - name: http
       port: 6333
@@ -39,13 +38,15 @@ service:
       checksEnabled: false
 
 ingress:
-  enabled: false
+  enabled: true
   ingressClassName: ""
   additionalLabels: {}
-  annotations: {}
-    # kubernetes.io/ingress.class: alb
+  annotations: {
+    kubernetes.io/ingress.class: gce,
+    networking.gke.io/managed-certificates: managed-cert
+  }
   hosts:
-    - host: example-domain.com
+    - host: db.indexes.live
       paths:
         - path: /
           pathType: Prefix
@@ -136,6 +137,12 @@ config:
       port: 6335
     consensus:
       tick_period_ms: 100
+  service:
+    max_request_size: 1000
+  hnsw_index:
+    m: 64
+    ef_construct: 256
+    
 
 sidecarContainers: []
 # sidecarContainers:

@@ -1,0 +1,11 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: managed-cert
+spec:
+  domains:
+  - indexes.live
+  - www.indexes.live
+  - db.indexes.live
+  - api.indexes.live
+  - ai.indexes.live
