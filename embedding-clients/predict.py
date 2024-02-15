@@ -33,7 +33,7 @@ class EmbeddingWorkerVertexAI:
         if self.task == 1:
             self.tokenizer = partial(
                 self._tokenizer,
-                padding="max_length",
+                padding="longest",
                 truncation=True,
                 max_length=512,
                 return_tensors="np",
@@ -41,7 +41,7 @@ class EmbeddingWorkerVertexAI:
         else:
             self.tokenizer = partial(
                 self._tokenizer,
-                padding="max_length",
+                padding="longest",
                 truncation=True,
                 max_length=128,
                 return_tensors="np",

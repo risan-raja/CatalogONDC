@@ -54,13 +54,13 @@ class SparseEmbeddingClient:
     
     def tokenize(self, text: Union[str, list[str]]) -> dict[str, np.ndarray]:
         tokens = self.tokenizer(text)
-        return tokens
+        return tokens # type: ignore
     
     def embed(self, text: Union[str, list[str]]):
         tokens = self.tokenize(text)
         inputs = self.load_inputs(tokens)
         results = self.client.infer(model_name=self.model_name, inputs=inputs, outputs=self.output_fields())
-        return results.as_numpy("sparse_index")
+        return results.as_numpy("sparse_index") # type: ignore
     
 
 
