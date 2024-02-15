@@ -40,8 +40,8 @@ proc = SparseDocTextPreprocessor()
 doc_samples = [proc.clean_text(doc) for doc in doc_samples]
 tokens = spl_tokenizer(doc_samples, return_tensors="pt")
 
-input_ids = tokens['input_ids'].to("cuda")
-attention_mask = tokens["attention_mask"].to("cuda")
+input_ids = tokens['input_ids'].to("cuda") # type: ignore
+attention_mask = tokens["attention_mask"].to("cuda") # type: ignore
 
 
 class TransformerMLM(torch.nn.Module):

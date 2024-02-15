@@ -29,4 +29,4 @@ class SpareseResults(torch.nn.Module):
 srm = SpareseResults()
 srm = torch.jit.script(srm)
 
-srm.save("splade_models/sparse_results.pt")
+srm.save("splade_models/sparse_results.pt") # type: ignore

@@ -1,12 +1,45 @@
 from functools import partial
 import numpy as np
 import tritonclient.http as triton_http
+import orjson
 from google.api import httpbody_pb2
 from google.cloud import aiplatform as aip
 from google.cloud import aiplatform_v1 as gapic
 from transformers import AutoTokenizer
 import time
+from dataclasses import dataclass
 import asyncio
+
+
+@dataclass
+class OutputTensor:
+    name: str
+    shape: list
+    datatype: list[int]
+    data: list
+
+    @staticmethod
+    def process_sparse(sv):
+        batch_size = sv.shape[0]
+        results = []
+        for batch in np.arange(batch_size):
+            mask = sv[batch][0] > 0
+            indices = sv[batch][0][mask]
+            values = sv[batch][1][mask]
+            results.append({'indices': indices, 'values': values})
+        return results
+
+    def __post_init__(self):
+        data_type_map = {
+            "FP32": np.float32,
+            "FP16": np.float16,
+            "INT32": np.int32,
+            "INT64": np.int64,
+        }
+        self.data = np.array(self.data,dtype=data_type_map[self.datatype]).reshape(self.shape) # type: ignore
+        if self.name == "sparse_embedding":
+            self.data = self.process_sparse(self.data)
+
 
 
 class EmbeddingWorkerVertexAI:
@@ -22,7 +55,7 @@ class EmbeddingWorkerVertexAI:
             raise ValueError("Incorrect task (either 'query' or 'document')")
         self.input_names = ["input_ids", "token_type_ids", "attention_mask"]
         self.output_names = ["dense_embedding", "sparse_embedding"]
-        self._tokenizer = AutoTokenizer.from_pretrained("bert_tokenizer/")
+        self._tokenizer = AutoTokenizer.from_pretrained("../bert-tokenizer-hf/")
 
         self.headers = {
             "x-vertex-ai-triton-redirect": f"v2/models/{self.model_name}/infer",
@@ -43,7 +76,7 @@ class EmbeddingWorkerVertexAI:
                 self._tokenizer,
                 padding="longest",
                 truncation=True,
-                max_length=128,
+                max_length=256,
                 return_tensors="np",
             )
         self.api_endpoint = f"projects/{self.project_id}/locations/{self.location}/endpoints/{self.endpoint_id}"
@@ -76,6 +109,7 @@ class EmbeddingWorkerVertexAI:
         _data, _ = triton_http._utils._get_inference_request(
             inputs=self.prepare_inputs(payload),
             outputs=self.triton_output_http,
+            # outputs=None,
             request_id="1",
             sequence_id=0,
             sequence_start=False,
@@ -90,44 +124,32 @@ class EmbeddingWorkerVertexAI:
             endpoint="projects/341272062859/locations/asia-south1/endpoints/430471996413837312",
             http_body=http_body,
         )
-
         response = self.gapic_client.raw_predict(
             request=request, metadata=tuple(self.headers.items())
         )
+        response = orjson.loads(response.data) # type: ignore
+        response = [OutputTensor(**output) for output in response["outputs"]]
         return response
     
-    def embed(self,payload):
+    def profile_embed(self,payload):
         start = time.perf_counter()
         response = self.infer_request(payload)
         end = time.perf_counter()
         print(f"{end - start} seconds")
     
-    async def async_embed(self,payload):
+    async def profile_async_embed(self,payload):
         start = time.perf_counter()
         # loop = asyncio.get_event_loop()
         # response_dict = loop.run_in_execu/tor(None, self.infer_request, payload)
         response = self.infer_request(payload)
         end = time.perf_counter()
         print(f"{end - start} seconds")
-
-
-sample ={
-    "_id": "6880884c_4ce76b05",
-    "text": "Fashion|Women's Apparel|Indian & Fusion Wear|Kurtas, Kurta Sets & Suits|brand->Anubhutee|product name->Women Navy Blue Yoke Design Straight Kurta|short product description->Navy blue yoke design straight kurta with thread work detail, has a round neck, three-quarter sleeves, straight hem, side slits, button closure|size->M|colour->Navy Blue,Blue|pattern->Yoke Design|occasion->Festive|shape->Straight|neck->Round Neck|fit->Straight|design styling->Regular|print or pattern type->Paisley|length->Calf Length|weave type->Machine Weave|slit detail->Side Slits|weave pattern->Regular|trend->Slits|ornamentation->Thread Work|gender->Women|selling price->6960.0|sleeve length->Three-Quarter Sleeves|hemline->Straight|colour family->Indigo|rating->4.3|mrp->2049.0",
-    "md5_hash": "4064381492b7a15310639327636428af",
-}
-async def test_async_speed():
-    worker = EmbeddingWorkerVertexAI("document")
-    results = await asyncio.gather(*[worker.async_embed(sample["text"]) for _ in range(1000)])
-    return "Done"
-
-if __name__ == "__main__":
-    worker = EmbeddingWorkerVertexAI("document")
-    import time
-    for _ in range(1000):
-        start = time.perf_counter()
-        embedding = worker.infer_request(sample["text"])
-        # print(embedding)/
-        end = time.perf_counter()
-        print(f"{end - start} seconds")
-    asyncio.run(test_async_speed())
+    
+    async def async_mbed(self,payload):
+        response = self.infer_request(payload)
+        return response
+    
+    def embed(self,payload):
+        response = self.infer_request(payload)
+        return response
+    

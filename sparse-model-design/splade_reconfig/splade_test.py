@@ -41,7 +41,7 @@ spl_tokenizer = partial(tokenizer, return_tensors="pt", padding="longest", trunc
 
 def infer(ort_session, doc_samples, N=16):
     tokens = spl_tokenizer(doc_samples, return_tensors="pt")
-    tk = {k:tokens[k].numpy()[:N] for k in tokens}
+    tk = {k:tokens[k].numpy()[:N] for k in tokens} # type: ignore
     before = time.perf_counter()    
     out = ort_session.run(["sparse_embeddings"], tk)
     time_taken =time.perf_counter()-before
