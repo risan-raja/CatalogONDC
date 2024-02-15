@@ -7,6 +7,7 @@ from google.api import httpbody_pb2
 from google.cloud import aiplatform as aip
 from google.cloud import aiplatform_v1 as gapic
 from transformers import AutoTokenizer
+import numba as nbp
 import time
 from dataclasses import dataclass, field
 import asyncio
@@ -14,6 +15,26 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
+
+
+@nbp.njit
+def process_sparse(sv):
+    """
+    Process sparse values.
+
+    Parameters
+    ----------
+    sv
+        Sparse values to be processed.
+    """
+    batch_size = sv.shape[0]
+    results = []
+    for batch in np.arange(batch_size):
+        mask = sv[batch][0] > 0
+        indices = sv[batch][0][mask]
+        values = sv[batch][1][mask]
+        results.append({"indices": indices, "values": values})
+    return results
 
 @dataclass
 class OutputTensor:
@@ -37,24 +58,7 @@ class OutputTensor:
     datatype: list[int]
     data: list = field(repr=False)
 
-    @staticmethod
-    def process_sparse(sv):
-        """
-        Process sparse values.
-
-        Parameters
-        ----------
-        sv
-            Sparse values to be processed.
-        """
-        batch_size = sv.shape[0]
-        results = []
-        for batch in np.arange(batch_size):
-            mask = sv[batch][0] > 0
-            indices = sv[batch][0][mask]
-            values = sv[batch][1][mask]
-            results.append({"indices": indices, "values": values})
-        return results
+    
 
     def __post_init__(self):
         """
@@ -73,7 +77,7 @@ class OutputTensor:
         }
         self.data = np.array(self.data, dtype=data_type_map[self.datatype]).reshape(self.shape)  # type: ignore
         if self.name == "sparse_embedding":
-            self.data = self.process_sparse(self.data)
+            self.data = process_sparse(self.data)
         if self.name == "last_hidden_state":
             self.name = "dense_embedding"
 
