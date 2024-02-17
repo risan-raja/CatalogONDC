@@ -1,4 +1,6 @@
-![alt text](images/banner.png?raw=true)
+<!-- ![alt text](images/picsvg_download.svg) -->
+<img src="images/picsvg_download.svg" width="2048"/>
+
 ### 1. Problem Statement
 #### THEME:
 Retail Commerce
