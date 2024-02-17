@@ -1,5 +1,4 @@
-### Catalog Indexing Problem Statement
-
+![alt text](https://github.com/risan-raja/CatalogONDC/blob/master/image.jpg?raw=true)
 ### 1. Problem Statement
 #### THEME:
 Retail Commerce

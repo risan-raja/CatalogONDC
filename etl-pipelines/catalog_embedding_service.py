@@ -3,7 +3,7 @@ import os
 import time
 from tqdm import tqdm
 import asyncio
-from ensemble_client import DocEmbedding
+from local_ensemble_client import DocEmbedding
 from pymongo import MongoClient
 from qdrant_client import QdrantClient, models
 from concurrent.futures import ThreadPoolExecutor
