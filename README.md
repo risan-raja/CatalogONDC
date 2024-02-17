@@ -1,4 +1,4 @@
-![alt text](https://github.com/risan-raja/CatalogONDC/blob/master/images/banner.png?raw=true)
+![alt text](images/banner.png?raw=true)
 ### 1. Problem Statement
 #### THEME:
 Retail Commerce
