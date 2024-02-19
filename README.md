@@ -52,5 +52,5 @@ Traditional **inverted indexes** are falling short. Their reliance on keywords a
 
 ##### Generalized ER Diagram
 <div style="background:#edf5ff">
-<img style="background:#edf5ff" src="images/ER Diagram.svg" width="1024"/>
+<img src="images/ER Diagram.svg" width="1024"/>
 </div>
