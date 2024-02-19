@@ -32,13 +32,25 @@ Traditional **inverted indexes** are falling short. Their reliance on keywords a
 
 #### Modules
 ##### Embedding Engine
+
+<div style="background:#edf5ff">
 <img src="images/Embedding Engine.svg" width="2048"/>
+</div>
+
+
 
 ##### ETL Pipeline
+<div style="background:#edf5ff">
 <img src="images/ETL pipeline.svg" width="2048"/>
+</div>
+
 
 ##### Query Resolution
-<img style="background:#edf5ff" src="images/Query Resolution Flow.svg" width="2048"/>
+<div style="background:#edf5ff">
+<img  src="images/Query Resolution Flow.svg" width="2048"/>
+</div>
 
 ##### Generalized ER Diagram
+<div style="background:#edf5ff">
 <img style="background:#edf5ff" src="images/ER Diagram.svg" width="1024"/>
+</div>
