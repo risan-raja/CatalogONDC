@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1738.1544"
+   height="123.29772"
+   viewBox="0 0 1738.1543 123.29773"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="perf_banner.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="px"
+     showgrid="false"
+     height="607px"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="660.43773"
+     inkscape:cy="-226.27417"
+     inkscape:window-width="2560"
+     inkscape:window-height="1371"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-365.81988,-204.83193)">
+    <rect
+       style="fill:#0066ff;fill-opacity:1;stroke-width:1.65908"
+       id="rect846"
+       width="1476.5175"
+       height="58.740238"
+       x="366.07971"
+       y="205.07634"
+       ry="0.61917996" />
+    <rect
+       style="fill:#0066ff;stroke-width:1.65908"
+       id="rect846-6"
+       width="1476.524"
+       height="58.740238"
+       x="366.02789"
+       y="268.63074"
+       ry="0.61917996" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none"
+       x="1104.1353"
+       y="245.91898"
+       id="text17134"><tspan
+         sodipodi:role="line"
+         id="tspan17132"
+         x="1104.1353"
+         y="245.91898"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32px;font-family:'Roboto Slab';-inkscape-font-specification:'Roboto Slab Bold';text-align:center;text-anchor:middle;fill:#ffffff">Products Indexed/min</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:32px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none"
+       x="1104.1962"
+       y="303.15305"
+       id="text17134-2"><tspan
+         sodipodi:role="line"
+         x="1104.1962"
+         y="303.15305"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32px;font-family:'Roboto Slab';-inkscape-font-specification:'Roboto Slab Bold';text-align:center;text-anchor:middle;fill:#ffffff"
+         id="tspan28179">Average Response Time*</tspan></text>
+    <rect
+       style="fill:#e3f4d7;fill-opacity:1;stroke:#e3f4d7;stroke-width:1.13697;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.5456;stroke-opacity:0.998748"
+       id="rect53134"
+       width="1737.0175"
+       height="3.8634744"
+       x="366.38837"
+       y="264.32022"
+       ry="0.34084111"
+       rx="0" />
+    <g
+       id="g79865"
+       transform="translate(0.19972992,0.13334274)">
+      <rect
+         style="fill:#00d400;fill-opacity:1;stroke-width:0.691339"
+         id="rect846-2"
+         width="256.3815"
+         height="58.740238"
+         x="1847.3436"
+         y="204.86417"
+         ry="0.61917996" />
+      <rect
+         style="fill:#00d400;fill-opacity:1;stroke-width:0.691339"
+         id="rect846-2-1"
+         width="256.3815"
+         height="58.740238"
+         x="1847.3436"
+         y="268.60416"
+         ry="0.61917996" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;fill:#d7f4d7;fill-opacity:1;stroke:none"
+         x="1930.9695"
+         y="249.33119"
+         id="text32205"><tspan
+           sodipodi:role="line"
+           id="tspan32203"
+           x="1930.9695"
+           y="249.33119"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Bold';fill:#d7f4d7">23 K</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;fill:#d7f4d7;fill-opacity:1;stroke:none"
+         x="1859.4009"
+         y="308.94272"
+         id="text32205-0"><tspan
+           sodipodi:role="line"
+           id="tspan32203-2"
+           x="1859.4009"
+           y="308.94272"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Bold';fill:#d7f4d7">0.02ms-5ms</tspan></text>
+      <rect
+         style="fill:#e3f4d7;fill-opacity:1;stroke:#e3f4d7;stroke-width:0.431293;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.5456;stroke-opacity:0.998748"
+         id="rect53996"
+         width="5.3757071"
+         height="122.40086"
+         x="1842.499"
+         y="204.91423"
+         ry="1.0721686" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:17.0535px;line-height:1.25;font-family:sans-serif;stroke-width:1.42112"
+       x="1661.9001"
+       y="284.4505"
+       id="text69300"
+       transform="scale(0.87769503,1.1393479)"><tspan
+         sodipodi:role="line"
+         x="1661.9001"
+         y="284.4505"
+         id="tspan70226"
+         style="font-style:italic;fill:#e3f4d7;stroke-width:1.42112">*Ignoring network latency</tspan></text>
+  </g>
+</svg>

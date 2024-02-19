@@ -2,14 +2,16 @@
 <img src="images/banner.png" width="2048"/>
 
 
-#### THEME:
-Retail Commerce
-
-#### PERFORMANCE METRICS:
-
-
 #### PROBLEM NAME:
 Catalog indexing engine
+
+#### PERFORMANCE METRICS:
+<img style="background:#abb0b6" src="images/perf_banner.svg" width="1024"/>
+<br>
+<div align="center" style="width:30%;font-size:11px">
+<b>What constitutes as `Indexing a Product` mean here?</b>
+<br>Generate Both Sparse and Dense Embeddings and writing the product to the Index.
+</div>
 
 
 #### Highlights  :
