@@ -11,7 +11,11 @@ Catalog indexing engine
 <br>Generate Both Sparse and Dense Embeddings and writing the product to the Index.
 </div>
 
-
+#### Dataset Description:
+The dataset is a subset of Fashion dataset from ONDC Official Catalog Repository. Over **300K** unique products with **120+** attributes. Prototyped with accurate L1, L2, L3 and L4 categorization. Brief Summary: 
+- #of L2 : 10 domains
+- #of L3 : 15 domains
+- #of L4 : 70 domains
 
 #### Highlights  :
 Traditional **inverted indexes** are falling short. Their reliance on keywords alone hinders comprehension and adaptability. This innovative submission utilizes cutting-edge neural search paradigms to:
