@@ -1,4 +1,3 @@
-<!-- ![alt text](images/picsvg_download.svg) -->
 <img src="images/banner.png" width="2048"/>
 
 
