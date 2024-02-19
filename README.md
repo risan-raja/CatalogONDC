@@ -61,4 +61,4 @@ Traditional **inverted indexes** are falling short. Their reliance on keywords a
  - Does not depend on any 3rd Party API's for indexing, all models are trained and deployable on-prem.
  - Deployment Options
    - Ecommerce Search results needs to be fast, accurate and relevant. Thus a master node returns the ids of the products and the slave nodes return the product details.
-   - A lot of companies have product data details hosted as an iframe or html type on their webpage, thus forwarding the centralized ID to the buyer app for rendering the product details, thus reducing the load on the buyer app and faster rendering due to data locality.
+   - A lot of companies have product data details hosted as an iframe or html type on their webpage, thus forwarding the centralized ID to the buyer app for rendering the product details within product listing. This reduces the latency on the buyer app and improves UX because of faster rendering as a result of data locality.
