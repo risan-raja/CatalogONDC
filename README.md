@@ -38,7 +38,7 @@ Traditional **inverted indexes** are falling short. Their reliance on keywords a
 <img src="images/ETL pipeline.svg" width="2048"/>
 
 ##### Query Resolution
-<img src="images/Query Resolution Flow.svg" width="2048"/>
+<img style="background:#edf5ff" src="images/Query Resolution Flow.svg" width="2048"/>
 
 ##### Generalized ER Diagram
-<img style="background:#abb0b6" src="images/ER Diagram.svg" width="1024"/>
+<img style="background:#edf5ff" src="images/ER Diagram.svg" width="1024"/>
