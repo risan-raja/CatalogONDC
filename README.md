@@ -13,6 +13,7 @@ Catalog indexing engine
 </div>
 
 
+
 #### Highlights  :
 Traditional **inverted indexes** are falling short. Their reliance on keywords alone hinders comprehension and adaptability. This innovative submission utilizes cutting-edge neural search paradigms to:
 
@@ -54,3 +55,10 @@ Traditional **inverted indexes** are falling short. Their reliance on keywords a
 <div style="background:#edf5ff">
 <img src="images/ER Diagram.svg" width="1024"/>
 </div>
+
+
+#### Deployment Options:
+ - Does not depend on any 3rd Party API's for indexing, all models are trained and deployable on-prem.
+ - Deployment Options
+   - Ecommerce Search results needs to be fast, accurate and relevant. Thus a master node returns the ids of the products and the slave nodes return the product details.
+   - A lot of companies have product data details hosted as an iframe or html type on their webpage, thus forwarding the centralized ID to the buyer app for rendering the product details, thus reducing the load on the buyer app and faster rendering due to data locality.
