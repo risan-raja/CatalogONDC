@@ -55,6 +55,10 @@ Traditional **inverted indexes** are falling short. Their reliance on keywords a
 <img src="images/ER Diagram.svg" width="1024"/>
 </div>
 
+##### Embedding Projection Sample
+<div style="display:flex;">
+<img src="images/embedding-projector.gif"/>
+</div>
 
 #### Deployment Options:
  - Does not depend on any 3rd Party API's for indexing, all models are trained and deployable on-prem.
