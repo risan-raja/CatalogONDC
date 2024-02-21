@@ -5,9 +5,9 @@ services:
     network_mode: "host"
     volumes:
       - type: bind
-        source: /home/op3ntrap/Documents/CatalogueScoring/submission/model_repository
+        source: /home/op3ntrap/Repos/CatalogONDC/model_repository
         target: /models
-    command: tritonserver --model-repository=/models --model-control-mode=poll --repository-poll-secs=20 --exit-on-error false
+    command: tritonserver --model-repository=/models --model-control-mode=poll --repository-poll-secs=20 --exit-on-error true
     deploy:
       resources:
         reservations:
