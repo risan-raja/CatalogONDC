@@ -59,7 +59,7 @@ Traditional **inverted indexes** are falling short. Their reliance on keywords a
 <img src="images/ER Diagram.svg" width="2048"/>
 </div>
 
-##### Embedding Projection Sample
+##### Embedding Projection
 <div style="display:flex;">
 <img src="images/embedding-projector.gif" width="2048"/>
 </div>
