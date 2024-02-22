@@ -1,0 +1,58 @@
+feature_name,Location,Filters,Selectable,Logical Group,Suggestive Enums,Variant,dtype
+Colour,"CLP, PDP",Y,Y,Group 1,Y,Y,Alpha
+Size,"CLP, PDP",Y,Y,Group 1,Y,Y,AlphaNumeric
+Qty,PDP,,Y,,N,,Numeric
+Brand Name,"CLP, PDP",Y,Y,Group 1,N,,AlphaNumeric
+MRP,"CLP, PDP",,N,Group 1,N,,Numeric
+Selling Price,"CLP, PDP",Y,Y,Group 1,N,,Numeric
+Short Product Description,"CLP, PDP",,N,Group 1,N,,AlphaNumeric
+SKU Code,PDP,,N,Group 5,N,,AlphaNumeric
+Pack Qty,PDP,,N,Group 5,N,,Numeric
+Pack Qty Unit of Measurement,PDP,,N,Group 5,N,,Alpha
+Material / Content,CLP,Y,Y,,Y,,Alpha
+Manufacturer Name & Address,PDP,,N,Group 6,N,,AlphaNumeric
+Country of Origin,PDP,,N,Group 6,N,,AlphaNumeric
+Customer Care Contact,PDP,,N,Group 6,N,,AlphaNumeric
+Care Instructions,PDP,,N,Group 5,N,,AlphaNumeric
+Time to ship,PDP,,N,Group 5,N,,AlphaNumeric
+Cancellable (Y/N),PDP,,N,Group 3,Y,,Alpha
+Returnable (Y/N),PDP,,N,Group 3,Y,,Alpha
+Replaceable (Y/N),PDP,,N,Group 3,Y,,Alpha
+COD Available (Y/N),PDP,,N,Group 3,Y,,Alpha
+Image 1,"CLP, PDP",,N,Group 1,N,,URL
+Image 2,"CLP, PDP",,N,Group 1,N,,URL
+Image 3,"CLP, PDP",,N,Group 1,N,,URL
+Image 4 / Video 1,"CLP, PDP",,N,Group 1,N,,URL
+Image 5 / Video 2,"CLP, PDP",,N,Group 1,N,,URL
+Gross Weight,PDP,,N,Group 3,N,,Numeric
+Gross Weight Unit of Measurement,PDP,,N,Group 3,N,,Alpha
+Length x Breadth x Height (Cubic Cm.),PDP,,N,Group 3,N,,AlphaNumeric
+Fragile (Y/N),PDP,,N,Group 3,Y,,Alpha
+Liquid (Y/N),PDP,,N,Group 3,Y,,Alpha
+Hazardous (Y/N),PDP,,N,Group 3,Y,,Alpha
+GTIN / HSN / EAN,PDP,,N,Group 5,N,,Alpha
+Gender,CLP,Y,Y,Group 5,Y,,Alpha
+Concern,CLP,Y,Y,Group 5,Y,,Alpha
+Ingredient,CLP,Y,Y,Group 5,Y,,Alpha
+Conscious,CLP,Y,Y,Group 5,Y,,Alpha
+Pack Size,CLP,Y,Y,Group 5,Y,,Alpha
+Preference,CLP,Y,Y,Group 5,Y,,Alpha
+Formulation,CLP,Y,Y,Group 5,Y,,Alpha
+Skin Type,CLP,Y,Y,Group 5,Y,,Alpha
+Age Group,CLP,Y,Y,Group 5,Y,,AlphaNumeric
+Occasion,CLP,Y,Y,Group 5,Y,,Alpha
+Fragrance Family,CLP,Y,Y,Group 5,Y,,Alpha
+Hair Type,CLP,Y,Y,Group 5,Y,,Alpha
+Benefit,CLP,Y,Y,Group 5,Y,,Alpha
+Warranty,CLP,Y,Y,Group 5,Y,,AlphaNumeric
+Jewellery Type,CLP,Y,Y,Group 5,Y,,Alpha
+Pattern,CLP,Y,Y,Group 5,Y,,Alpha
+Extension Type,CLP,Y,Y,Group 5,Y,,Alpha
+Extension Colour,CLP,Y,Y,Group 5,Y,,Alpha
+Finish,CLP,Y,Y,Group 5,Y,,Alpha
+Coverage,CLP,Y,Y,Group 5,Y,,Alpha
+Skin Tone,CLP,Y,Y,Group 5,Y,,Alpha
+SPF,CLP,Y,Y,Group 5,Y,,AlphaNumeric
+Bristle Type,CLP,Y,Y,Group 5,Y,,Alpha
+Brush Type,CLP,Y,Y,Group 5,Y,,Alpha
+Flavour,CLP,Y,Y,Group 5,Y,,Alpha
