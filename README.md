@@ -63,6 +63,11 @@ Traditional **inverted indexes** are falling short. Their reliance on keywords a
 <div style="display:flex;">
 <img src="images/embedding-projector.gif"/>
 </div>
+<br>
+<div style="display:flex;">
+<img src="https://lh7-us.googleusercontent.com/PACOuW_iq5NUGrmU5wJBfPpIVpNR_xurovmiEkVgCzQaGfwrjgR2tDZgH4DL9SvnuqLJNWZRpB-GXWQjBKRRox_m_kiV8tWkAa7TAsULoPQUci3qYUqpOhTglZZrKdDs5BP3Qq45smE__vZoIMoI4bgO_Q=s2048"/>
+</div>
+
 
 #### Deployment Options:
  - Does not depend on any 3rd Party API's for indexing, all models are trained and deployable on-prem.
