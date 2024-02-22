@@ -2,10 +2,8 @@ from dataclasses import dataclass, field
 from uuid import uuid4
 from typing import Any, Optional
 from enum import Enum
-from ..clients.data_client import data_client
+from .clients.data_client import data_client
 from functools import lru_cache
-
-
 
 
 @dataclass

@@ -52,8 +52,8 @@ from dataclasses import dataclass, field
 from hashlib import md5
 import datetime
 from typing import Any
-from .category import Category
-from ..clients.data_client import data_client
+from category import Category
+from clients.data_client import data_client
 from tqdm import tqdm
 @dataclass
 class BaseProduct:
