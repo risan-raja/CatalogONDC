@@ -17,7 +17,9 @@
      - Qdrant returns top 10000 results
      - Filter results based on payload filters.
      - Send ids to High Availability Database for final retrieval.
-  
+
+#### For more details 
+[product-information-management](product-information-management/README.md)
 
 #### Files in this directory
  - `catalog_embedding_service.py` - Service to convert structured data to unstructured data and add to Qdrant
