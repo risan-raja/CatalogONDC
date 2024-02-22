@@ -17,15 +17,24 @@ services:
               capabilities: [gpu]
   mongodb:
     image: mongo:7.0.5-jammy
+    restart: always
     ports:
       - 27017:27017
     volumes:
       - mongodb_data:/data/db
+  
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --save 60 1 --loglevel nothing
+    volumes:
+      - redis_data:/data
 
   qdrant:
     image: qdrant/qdrant:latest
     restart: always
-    container_name: qdrant
     ports:
       - 6333:6333
       - 6334:6334
@@ -39,4 +48,10 @@ services:
 configs:
   qdrant_config:
     content: |
-            log_level: INFO  
+            log_level: INFO
+
+
+volumes:
+  mongodb_data:
+  redis_data:
+  qdrant_data:
