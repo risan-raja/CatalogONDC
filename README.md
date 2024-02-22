@@ -56,16 +56,16 @@ Traditional **inverted indexes** are falling short. Their reliance on keywords a
 
 ##### Generalized ER Diagram
 <div style="background:#edf5ff">
-<img src="images/ER Diagram.svg" width="1024"/>
+<img src="images/ER Diagram.svg" width="2048"/>
 </div>
 
 ##### Embedding Projection Sample
 <div style="display:flex;">
-<img src="images/embedding-projector.gif"/>
+<img src="images/embedding-projector.gif" width="2048"/>
 </div>
 <br>
 <div style="display:flex;">
-<img src="https://lh7-us.googleusercontent.com/PACOuW_iq5NUGrmU5wJBfPpIVpNR_xurovmiEkVgCzQaGfwrjgR2tDZgH4DL9SvnuqLJNWZRpB-GXWQjBKRRox_m_kiV8tWkAa7TAsULoPQUci3qYUqpOhTglZZrKdDs5BP3Qq45smE__vZoIMoI4bgO_Q=s2048"/>
+<img src="images/qdrant-embedding.gif" width="2048"/>
 </div>
 
 
