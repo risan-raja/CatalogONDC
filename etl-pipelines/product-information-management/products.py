@@ -97,15 +97,12 @@ class Product(BaseProduct):
             data_client.catalogStore['indexed_payload'].insert_one(
                 vec_payload
             )
-# Unique url_uids  only
-            
-url_uids = []
+
 
 with tqdm(total=360000) as pbar:
   for product in data_client.catalogStore.catalogs.find():
-    if product['url_uid'] not in url_uids:
-      Product(product)
-      pbar.update(1)
+    Product(product)
+    pbar.update(1)
 
 
 
