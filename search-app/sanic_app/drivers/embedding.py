@@ -58,9 +58,6 @@ class QueryEmbedding:
     def tokenize(self, text: list[str]):
         return self.tokenizer(text)
 
-    def cleanup(self, sparse_embedding):
-        pass
-
     def embed(self, text: Union[str, list[str]]):
         if isinstance(text, str):
             text = [text]
@@ -86,6 +83,8 @@ class QueryEmbedding:
         print(f"inference time: {(end - start)/len(text)}")
         return results
     
+    async def async_infer(self, text: list[str]):
+        return asyncio.to_thread(self.embed, text)    
 
 if __name__ == "__main__":
     qe = QueryEmbedding()
