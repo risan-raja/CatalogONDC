@@ -1,8 +1,5 @@
 import orjson
 
-# app = Sanic.get_app("ONDC_Index")
-
-
 async def embed_query(request):
     if request.json:
         if "search_text" in request.json:

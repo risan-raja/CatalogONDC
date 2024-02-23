@@ -1,0 +1,21 @@
+The tokenizer class you load from this checkpoint is not the same type as the class this function is called from. It may result in unexpected tokenization. 
+The tokenizer class you load from this checkpoint is 'BertTokenizer'. 
+The class this function is called from is 'PreTrainedTokenizerFast'.
+[2024-02-23 11:18:50 +0530] [2649991] [INFO] Sanic v23.12.1
+[2024-02-23 11:18:50 +0530] [2649991] [INFO] Goin' Fast @ http://127.0.0.1:9010
+[2024-02-23 11:18:50 +0530] [2649991] [INFO] app: ONDC_Index
+[2024-02-23 11:18:50 +0530] [2649991] [INFO] mode: production, single worker
+[2024-02-23 11:18:50 +0530] [2649991] [INFO] server: sanic, HTTP/1.1
+[2024-02-23 11:18:50 +0530] [2649991] [INFO] python: 3.10.13
+[2024-02-23 11:18:50 +0530] [2649991] [INFO] platform: Linux-6.6.10-76060610-generic-x86_64-with-glibc2.35
+[2024-02-23 11:18:50 +0530] [2649991] [INFO] packages: sanic-routing==23.12.0, sanic-ext==23.12.0
+The tokenizer class you load from this checkpoint is not the same type as the class this function is called from. It may result in unexpected tokenization. 
+The tokenizer class you load from this checkpoint is 'BertTokenizer'. 
+The class this function is called from is 'PreTrainedTokenizerFast'.
+[2024-02-23 11:18:51 +0530] [2650067] [INFO] Sanic Extensions:
+[2024-02-23 11:18:51 +0530] [2650067] [INFO]   > injection [0 dependencies; 0 constants]
+[2024-02-23 11:18:51 +0530] [2650067] [INFO]   > openapi [http://127.0.0.1:9010/docs]
+[2024-02-23 11:18:51 +0530] [2650067] [INFO]   > http 
+[2024-02-23 11:18:51 +0530] [2650067] [INFO]   > templating [jinja2==3.1.3]
+[2024-02-23 11:18:51 +0530] [2650067] [INFO] [sanic-redis] connecting
+[2024-02-23 11:18:51 +0530] [2650067] [INFO] Starting worker [2650067]

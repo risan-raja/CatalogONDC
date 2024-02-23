@@ -140,7 +140,7 @@ class SearchView(HTTPMethodView):
             scroll_filter=structured_filter,
             limit=limit,
             offset=offset_values["structured_search"],
-            with_payload=["product_name"],
+            with_payload=True,
             with_vectors=False,
         )
         if pure_structured_query:
@@ -177,7 +177,7 @@ class SearchView(HTTPMethodView):
             query_vector=dense_vector,
             limit=limit,
             offset=offset_values["dense_vector_search"],
-            with_payload=["product_name"],
+            with_payload=True,
             with_vectors=False,
         )
         # Sparse vector search query
@@ -186,7 +186,7 @@ class SearchView(HTTPMethodView):
             query_vector=sparse_vector,
             limit=limit,
             offset=offset_values["sparse_vector_search"],
-            with_payload=["product_name"],
+            with_payload=True,
             with_vectors=False,
         )
         all_searches = [structured_search, dense_vector_search, sparse_vector_search]
