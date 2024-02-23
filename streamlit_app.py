@@ -8,4 +8,4 @@ components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vRst3OatJS2Aj
 st.text("Time to complete 10,000 searches ~ 90s")
 st.text("Roughly 6667 Searches per minute on a single instance")
 st.image("images/response_times.png",width=1280)
-st.image("images/10000-requests.gif", width=1280)
+st.image("images/10000-requests.gif", width=320)
