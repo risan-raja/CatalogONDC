@@ -20,7 +20,7 @@ def process_sparse(sv):
         mask = sv[batch][0] > 0
         indices = sv[batch][0][mask]
         values = sv[batch][1][mask]
-        results.append({'indices': indices, 'values': values})
+        results.append({'indices': indices.tolist(), 'values': values.tolist()})
     return results
 
 
@@ -73,7 +73,7 @@ class QueryEmbedding:
         results = {name: results.as_numpy(name) for name in self.output_names} # type:ignore
         results['sparse_embedding']= [dict(x) for x in process_sparse(results['sparse_embedding'])] # type:ignore
         batch_size = results['dense_embedding'].shape[0] # type:ignore
-        results = [{"dense": results['dense_embedding'][i], "sparse": results['sparse_embedding'][i]} for i in range(batch_size)] # type:ignore
+        results = [{"dense": results['dense_embedding'][i].tolist(), "sparse": results['sparse_embedding'][i]} for i in range(batch_size)] # type:ignore
         return results
     
     def infer(self, text: list[str]):
@@ -83,12 +83,12 @@ class QueryEmbedding:
         print(f"inference time: {(end - start)/len(text)}")
         return results
     
-    async def async_infer(self, text: list[str]):
+    def async_infer(self, text: list[str]):
         return asyncio.to_thread(self.embed, text)    
 
-if __name__ == "__main__":
-    qe = QueryEmbedding()
-    text = ["This is a test"]
-    results = qe.infer(text)
-    print(results)
-    print("done")
+# if __name__ == "__main__":
+#     qe = QueryEmbedding()
+#     text = ["This is a test"]
+#     results = qe.infer(text)
+#     print(results)
+#     print("done")
