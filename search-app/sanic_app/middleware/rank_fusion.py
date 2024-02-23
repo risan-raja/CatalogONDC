@@ -17,9 +17,9 @@ def convert_to_runs(combined_results):
 
 def fuse_rank(combined_json):
     if combined_json:
-        print("Fusing ranks")
+        # print("Fusing ranks")
         if combined_json["rerank"]:
-            print("Reranking")
+            # print("Reranking")
             combined_results = combined_json["combined_results"]
             last = None
             if combined_results["structured_search"]:

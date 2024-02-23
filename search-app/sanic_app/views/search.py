@@ -77,10 +77,15 @@ def fuse_point_info(points):
     """
     fused_points = {}
     for point in points:
-        fused_points[point.id] = {
-            "payload": point.payload,
-            "score": point.score,
-        }
+        if isinstance(point,models.Record):
+            fused_points[point.id] = {
+                "payload": point.payload,
+            }
+        else:
+            fused_points[point.id] = {
+                "payload": point.payload,
+                "score": point.score,
+            }
     return fused_points
 
 

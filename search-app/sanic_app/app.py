@@ -3,6 +3,7 @@ from .drivers.embedding import QueryEmbedding
 from .filter_enums.enums import L2_Enums, L3_Enums, L4_Enums
 from .drivers.redis_cache import redis
 from .middleware.embed_query import embed_query
+from sanic_ext import Extend
 from .middleware.offset import fetch_offsets
 from .views.search import SearchView
 from sanic import Sanic
@@ -19,6 +20,8 @@ def create_app():
             "REDIS": "redis://localhost:6379/0",
         }
     )
+    app.config.CORS_ORIGINS="*"
+    Extend(app)
     redis.init_app(app)
     app.ctx.vector_db = qclient
     app.register_middleware(embed_query, "request",priority=3)
