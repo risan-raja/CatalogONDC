@@ -65,7 +65,7 @@ def fuse_rank(combined_json):
                         results[rec] = last[rec]
                         results[rec]["score"] = 1e-5
             del combined_json["combined_results"]
-            combined_json["results"] = results
+            combined_json["results"] = [{"id": k, "payload":v["payload"],"score": v["score"]} for k, v in results.items()]
             # print(combined_json.raw_body)
             return combined_json
         else:

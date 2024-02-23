@@ -1,3 +1,3 @@
-from qdrant_client import AsyncQdrantClient
+from qdrant_client import QdrantClient
 
-qclient = AsyncQdrantClient(location="localhost",port=6333)
+qclient = QdrantClient(location="localhost",port=6333)

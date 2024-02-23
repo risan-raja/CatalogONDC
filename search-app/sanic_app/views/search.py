@@ -133,24 +133,17 @@ class SearchView(HTTPMethodView):
         if request.json.get("limit"):
             limit = request.json["limit"]
         else:
-            limit = 1000
+            limit = 10
         # Structured search query
         if filters_with_text:
             structured_filter = filters_with_text
         else:
             structured_filter = must_only_filters
         # if must_only_filters or filters_with_text:
-        structured_search = qclient.scroll(
-            collection_name="ondc-index",
-            scroll_filter=structured_filter,
-            limit=limit,
-            offset=offset_values["structured_search"],
-            with_payload=True,
-            with_vectors=False,
-        )
+        structured_search = (None,None)
         if pure_structured_query:
             # Fetch Structured Search Results
-            structured_search_results, structured_offset = await structured_search  # type: ignore
+            structured_search_results, structured_offset = structured_search  # type: ignore
             # Check if the offset is already present
             if request.ctx.offset:
                 unique_offset = request.json.get("offset")
@@ -165,9 +158,7 @@ class SearchView(HTTPMethodView):
             combined_results = {
                 "combined_results": {
                     "structured_search": (
-                        fuse_point_info(structured_search_results)
-                        if len(structured_search_results) > 0
-                        else None
+                        None
                     ),
                     "dense_vector_search": None,
                     "sparse_vector_search": None,
@@ -182,7 +173,7 @@ class SearchView(HTTPMethodView):
             query_vector=dense_vector,
             limit=limit,
             offset=offset_values["dense_vector_search"],
-            with_payload=True,
+            with_payload=["product_name", "short_product_description","L1","L2","L3","L4"],
             with_vectors=False,
         )
         # Sparse vector search query
@@ -191,11 +182,11 @@ class SearchView(HTTPMethodView):
             query_vector=sparse_vector,
             limit=limit,
             offset=offset_values["sparse_vector_search"],
-            with_payload=True,
+            with_payload=["product_name", "short_product_description","L1","L2","L3","L4"],
             with_vectors=False,
         )
-        all_searches = [structured_search, dense_vector_search, sparse_vector_search]
-        all_results = await asyncio.gather(*all_searches)
+        all_results = [(None,None), dense_vector_search, sparse_vector_search]
+        # all_results = await asyncio.gather(*all_searches)
         structured_search_results, structured_offset = all_results[0]
         if structured_offset is None:
             structured_offset = 0
@@ -218,9 +209,7 @@ class SearchView(HTTPMethodView):
         combined_results = {
             "combined_results": {
                 "structured_search": (
-                    fuse_point_info(structured_search_results)
-                    if len(structured_search_results) > 0
-                    else None
+                        None
                 ),
                 "dense_vector_search": (
                     fuse_point_info(all_results[1]) if len(all_results[1]) > 0 else None
