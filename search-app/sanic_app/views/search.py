@@ -2,6 +2,7 @@ import asyncio
 from sanic.views import HTTPMethodView
 from sanic import text
 from sanic.response import json
+from ..middleware.rank_fusion import fuse_rank
 from qdrant_client import models
 import uuid
 import orjson
@@ -9,7 +10,9 @@ import orjson
 # app = Sanic.get_app("ONDC_Index")
 
 
-def process_filters(request) -> tuple[models.Filter | None, models.Filter | None]:
+def process_filters(
+    request, skip_text=False
+) -> tuple[models.Filter | None, models.Filter | None]:
     filters = request.json.get("filters")
     search_text = request.json.get("search_text")
     must_only_filters = None
@@ -37,7 +40,7 @@ def process_filters(request) -> tuple[models.Filter | None, models.Filter | None
                 )
                 must_filters.append(filter)
         must_only_filters = models.Filter(must=must_filters)  # type: ignore
-    if search_text:
+    if search_text:  # If the search text is present and not skipped
         text_match_filters = [
             models.FieldCondition(
                 key="product_name",
@@ -67,6 +70,20 @@ def create_vector_models(query_embedding):
     return dense_vector, sparse_vector
 
 
+def fuse_point_info(points):
+    """
+    Embed the ID and the score of the point(if present) in the payload
+    and return as json serializable object
+    """
+    fused_points = {}
+    for point in points:
+        fused_points[point.id] = {
+            "payload": point.payload,
+            "score": point.score,
+        }
+    return fused_points
+
+
 class SearchView(HTTPMethodView):
     async def post(self, request):
         """
@@ -84,12 +101,26 @@ class SearchView(HTTPMethodView):
         """
         query_embedding = request.ctx.query_embedding
         pure_structured_query = False
+        # Skip structured query if the offset is null
+        # Because if structured query is already empty,
+        # then there is no need to perform it again
         if query_embedding is None:
             pure_structured_query = True
         else:
             query_embedding = query_embedding[0]
             # Construct Vectors
             dense_vector, sparse_vector = create_vector_models(query_embedding)
+        # Process Offset Early to avoid text search
+        if request.ctx.offset:
+            offset_values = request.ctx.offset
+            if isinstance(offset_values.get("structured_search"), str):
+                skip_structured_query = True
+        else:
+            offset_values = {
+                "structured_search": 0,
+                "dense_vector_search": 0,
+                "sparse_vector_search": 0,
+            }
         qclient = request.app.ctx.vector_db
         # Process All the filters
         must_only_filters, filters_with_text = process_filters(request)
@@ -97,32 +128,24 @@ class SearchView(HTTPMethodView):
         if request.json.get("limit"):
             limit = request.json["limit"]
         else:
-            limit = 20
-        # Process Offset
-        if request.ctx.offset:
-            offset_values = request.ctx.offset
-        else:
-            offset_values = {
-                "structured_search": 0,
-                "dense_vector_search": 0,
-                "sparse_vector_search": 0,
-            }
+            limit = 1000
         # Structured search query
         if filters_with_text:
             structured_filter = filters_with_text
         else:
             structured_filter = must_only_filters
+        # if must_only_filters or filters_with_text:
         structured_search = qclient.scroll(
             collection_name="ondc-index",
             scroll_filter=structured_filter,
             limit=limit,
             offset=offset_values["structured_search"],
-            with_payload=['product_name'],
+            with_payload=["product_name"],
             with_vectors=False,
         )
         if pure_structured_query:
             # Fetch Structured Search Results
-            structured_search_results, structured_offset = await structured_search
+            structured_search_results, structured_offset = await structured_search  # type: ignore
             # Check if the offset is already present
             if request.ctx.offset:
                 unique_offset = request.json.get("offset")
@@ -134,18 +157,27 @@ class SearchView(HTTPMethodView):
                 f"{unique_offset}:offset",
                 orjson.dumps({"structured_search": structured_offset}),
             )
-            results = {
-                "results": [point.payload for point in structured_search_results],
+            combined_results = {
+                "combined_results": {
+                    "structured_search": (
+                        fuse_point_info(structured_search_results)
+                        if len(structured_search_results) > 0
+                        else None
+                    ),
+                    "dense_vector_search": None,
+                    "sparse_vector_search": None,
+                },
+                "rerank":False,
                 "offset": unique_offset,
             }
-            return json(results)
+            return json(fuse_rank(combined_results))
         # Dense vector search query
         dense_vector_search = qclient.search(
             collection_name="ondc-index",
             query_vector=dense_vector,
             limit=limit,
             offset=offset_values["dense_vector_search"],
-            with_payload=['product_name'],
+            with_payload=["product_name"],
             with_vectors=False,
         )
         # Sparse vector search query
@@ -154,12 +186,14 @@ class SearchView(HTTPMethodView):
             query_vector=sparse_vector,
             limit=limit,
             offset=offset_values["sparse_vector_search"],
-            with_payload=['product_name'],
+            with_payload=["product_name"],
             with_vectors=False,
         )
         all_searches = [structured_search, dense_vector_search, sparse_vector_search]
         all_results = await asyncio.gather(*all_searches)
         structured_search_results, structured_offset = all_results[0]
+        if structured_offset is None:
+            structured_offset = 0
         offset_values["structured_search"] = structured_offset
         offset_values["dense_vector_search"] += limit
         offset_values["sparse_vector_search"] += limit
@@ -175,24 +209,22 @@ class SearchView(HTTPMethodView):
             orjson.dumps(offset_values),
         )
         # TODO: Perform Rank Fusion here
-        results ={
-            "results": [point.payload for point in structured_search_results+all_results[1]+all_results[2]],
+        # Return the results
+        combined_results = {
+            "combined_results": {
+                "structured_search": (
+                    fuse_point_info(structured_search_results)
+                    if len(structured_search_results) > 0
+                    else None
+                ),
+                "dense_vector_search": (
+                    fuse_point_info(all_results[1]) if len(all_results[1]) > 0 else None
+                ),
+                "sparse_vector_search": (
+                    fuse_point_info(all_results[2]) if len(all_results[2]) > 0 else None
+                ),
+            },
+            "rerank":True,
             "offset": unique_offset,
         }
-        print("******Structured Query Results*********\n")
-        for point in structured_search_results:
-            print("*********\n")
-            print(point)
-            print("*********\n\n")
-        print("******Dense Vector Query Results*********\n")
-        for point in all_results[1]:
-            print("*********\n")
-            print(point)
-            print("*********\n\n")
-        print("******Sparse Vector Query Results*********\n")
-        for point in all_results[2]:
-            print("*********\n")
-            print(point)
-            print("*********\n\n")
-        return text("Done")
-
+        return json(fuse_rank(combined_results))

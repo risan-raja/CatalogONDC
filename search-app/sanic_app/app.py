@@ -23,5 +23,6 @@ def create_app():
     app.ctx.vector_db = qclient
     app.register_middleware(embed_query, "request",priority=3)
     app.register_middleware(fetch_offsets, "request",priority=2)
+    # app.register_middleware(fuse_rank, "response")
     app.add_route(SearchView.as_view(), "/search")
     return app
